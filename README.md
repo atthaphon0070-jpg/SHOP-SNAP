@@ -31,30 +31,27 @@ An 18-slide interactive HTML presentation built around the idea *“ซื้อ
 - **Navigation bar:** it hides itself after about 3 seconds without mouse movement. Move the mouse to bring it back.
 - **Printing:** Print / Save as PDF produces 18 pages at 1920×1080, each showing a slide in its final state.
 
-## Before presenting: fill in the real team data
+## Files
 
-Some information was not in the source document, so the slides show clear **“รอยืนยัน” (pending)** placeholders instead of invented data. Edit the `window.SHOPSNAP_CONFIG` block near the top of `index.html`:
+- `index.html` — the interactive presentation (self-contained, works offline).
+- `SHOP-SNAP-Presentation.pdf` — static 18-page PDF (1920×1080 per page, each slide in its final state) for sharing or printing. Speaker notes are not included.
 
-| Slide | Setting | What it does |
-|---|---|---|
-| 02 | `entrepreneurs[0..1].name / .photo` | Real names and photos of the two entrepreneurs |
-| 09 | `dataStatus.*` | `'pending'`, `'real'` or `'demo'` for each item. The source left these unconfirmed. |
-| 13 | `revenue` | `null` shows the placeholder. `'none'` shows **ยังไม่มีรายได้** (no revenue yet). Any other text is shown exactly as typed. |
-| 17 | `extraActivity` / `hideExtraActivity` | The optional 4th activity card. Add one only after it is confirmed, or hide the card. |
-| 01, 05, 06, 08, 11, 17 | `photos.*` | Real screenshots and photos: homepage, artisan photo, old and new website, 5 prototype screens, course cover, activity photos |
+## Content
 
-**Photos:** put image files in `assets/img/` and use relative paths, for example `'assets/img/member1.jpg'`. A real photo replaces the illustration and its “ภาพประกอบ / ภาพจำลอง” label. If a file is missing, the slide keeps the illustration, so nothing appears broken. In that case the browser console shows a warning about the missing file.
+- **Slide 02:** entrepreneurs นายวชิรเมธี ภูกิ่งพลอย and นายภานุวัฒน์ พิชัยเชิด, with their photos embedded in the file.
+- **Slide 09:** the implemented part is the website structure and the five prototype features; sample data in the prototype is described as being for testing the positioning, not real sales data.
+- **Slide 13:** summarises months 15–20 (new positioning, prototype website, 4 revenue channels). No revenue figure is shown.
+- **Slide 17:** three activities (BMC ตีให้แตก · Startup Thailand League 2025 · SET e-Learning) shown with illustrations.
+- **QR codes (slides 8 and 15):** encode exactly `https://braincospace.com/shop`.
 
-**QR codes (slides 8 and 15):** these are built into the page as SVG and encode exactly `https://braincospace.com/shop`. Both were checked by decoding them from rendered screenshots. Whether the website itself is online has **not** been verified. Check it before the presentation.
+## Optional edits
 
-## Content integrity notes
+The `window.SHOPSNAP_CONFIG` block near the top of `index.html` has two optional settings:
 
-- **Illustrations:** the woven-mat artwork (slide 5), the before/after website mock-ups (slide 6), the prototype screens (slide 8), and the course-book cover (slide 11) are clearly labelled as illustrations or mock-ups. No real people, producers, reviews, prices, or sales figures are invented.
-- **Revenue (slide 13):** no figure is filled in automatically.
-- **Revenue channels (slide 10):** they are labelled as *proposed* channels, not revenue that already exists.
-- **Course outputs (slide 12):** they are labelled as *intended* course outputs.
-- **Comparison (slide 7):** it is labelled as the team's positioning view.
-- **Speaker roles:** the suggested split (ผู้ดูแลระบบ: slides 6–9 · ผู้ดูแลการตลาด: slides 5 and 10–14) and the prepared committee Q&A appear only in the speaker notes.
+- `revenue` — `null` (default) shows no revenue box on slide 13. Text such as `'12,345 บาท'` adds a TOTAL line showing that exact text; `'none'` shows “ยังไม่มีรายได้”.
+- `photos.*` — optional real screenshots/photos for slides 1, 5, 6, 8 and 11 (paths such as `'assets/img/homepage.png'`). A missing file keeps the illustration.
+
+If you edit `index.html`, re-export the PDF from Chrome: Print → Save as PDF, background graphics on.
 
 ## What was tested
 
@@ -71,6 +68,7 @@ These checks were run in headless Chromium:
 - **Reduced motion:** the reduced-motion mode shows the final state of each slide.
 - **Phone width:** no horizontal overflow.
 - **QR codes:** both decode to the correct URL.
-- **Console:** no errors or warnings, apart from the expected warning when a configured photo file is missing.
+- **Console:** no errors or warnings.
+- **PDF:** 18 pages; both QR codes in the PDF decode to the correct URL.
 
 Browsers other than Chromium, and real fullscreen on a projector, were not tested.
